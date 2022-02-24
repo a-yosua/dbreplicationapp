@@ -1,0 +1,96 @@
+<style>
+    .divTable{
+        display: table;
+        width: 100%;
+    }
+    .divTableRow {
+        display: table-row;
+    }
+    .divTableHeading {
+        background-color: #EEE;
+        display: table-header-group;
+    }
+    .divTableCell, .divTableHead {
+        border: 1px solid #999999;
+        display: table-cell;
+        padding: 3px 10px;
+    }
+    .divTableHeading {
+        background-color: #EEE;
+        display: table-header-group;
+        font-weight: bold;
+    }
+    .divTableFoot {
+        background-color: #EEE;
+        display: table-footer-group;
+        font-weight: bold;
+    }
+    .divTableBody {
+        display: table-row-group;
+    }
+</style>
+
+<p>
+    Departments table (SQL Server)
+</p>
+{% if sqlServerData %}
+    <div class="divTable">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell">deptcode</div>
+                <div class="divTableCell">deptname</div>
+                <div class="divTableCell">if_updt</div>
+            </div>
+            {% for data in sqlServerData %}
+                <div class="divTableRow">
+                    <div class="divTableCell">{{ data.deptcode }}</div>
+                    <div class="divTableCell">{{ data.deptname }}</div>
+                    <div class="divTableCell">{{ data.if_updt }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <p>No departments are available.</p>
+{% endif %}
+
+<p>
+    Departments table (PostgreSQL)
+</p>
+{% if postgreSQLData %}
+    <div class="divTable">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell">deptcode</div>
+                <div class="divTableCell">deptname</div>
+                <div class="divTableCell">if_updt</div>
+            </div>
+            {% for data in postgreSQLData %}
+                <div class="divTableRow">
+                    <div class="divTableCell">{{ data.deptcode }}</div>
+                    <div class="divTableCell">{{ data.deptname }}</div>
+                    <div class="divTableCell">{{ data.if_updt }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <p>No departments are available.</p>
+{% endif %}
+
+<p>
+    <a href="{% url 'index' %}">Main page</a>
+</p>
+
+<!-- {% if departmentList %}
+    <p>
+        Department table (PostgreSQL)
+    </p>
+    <p>
+    {% for department in departmentList %}
+        {{ department.deptcode}},  {{ department.deptname }}<br>
+    {% endfor %}
+    </p>
+{% else %}
+    <p>No departments are available.</p>
+{% endif %} -->

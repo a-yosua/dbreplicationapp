@@ -1,0 +1,87 @@
+<style>
+    .divTable{
+        display: table;
+        width: 100%;
+    }
+    .divTableRow {
+        display: table-row;
+    }
+    .divTableHeading {
+        background-color: #EEE;
+        display: table-header-group;
+    }
+    .divTableCell, .divTableHead {
+        border: 1px solid #999999;
+        display: table-cell;
+        padding: 3px 10px;
+    }
+    .divTableHeading {
+        background-color: #EEE;
+        display: table-header-group;
+        font-weight: bold;
+    }
+    .divTableFoot {
+        background-color: #EEE;
+        display: table-footer-group;
+        font-weight: bold;
+    }
+    .divTableBody {
+        display: table-row-group;
+    }
+</style>
+
+<p>
+    Events table (SQL Server)
+</p>
+{% if sqlServerData %}
+    <div class="divTable">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell">id</div>
+                <div class="divTableCell">message_header_id</div>
+                <div class="divTableCell">patient_number</div>
+                <div class="divTableCell">gw_updated_at</div>
+            </div>
+            {% for data in sqlServerData %}
+                <div class="divTableRow">
+                    <div class="divTableCell">{{ data.id }}</div>
+                    <div class="divTableCell">{{ data.message_header_id }}</div>
+                    <div class="divTableCell">{{ data.patient_number }}</div>
+                    <div class="divTableCell">{{ data.gw_updated_at }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <p>No events are available.</p>
+{% endif %}
+
+<p>
+    Events table (PostgreSQL)
+</p>
+{% if postgreSQLData %}
+    <div class="divTable">
+        <div class="divTableBody">
+            <div class="divTableRow">
+                <div class="divTableCell">id</div>
+                <div class="divTableCell">message_header_id</div>
+                <div class="divTableCell">patient_number</div>
+                <div class="divTableCell">gw_updated_at</div>
+            </div>
+            {% for data in postgreSQLData %}
+                <div class="divTableRow">
+                    <div class="divTableCell">{{ data.id }}</div>
+                    <div class="divTableCell">{{ data.message_header_id }}</div>
+                    <div class="divTableCell">{{ data.patient_number }}</div>
+                    <div class="divTableCell">{{ data.gw_updated_at }}</div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <p>No events are available.</p>
+{% endif %}
+
+<p>
+    <a href="{% url 'index' %}">Main page</a>
+</p>

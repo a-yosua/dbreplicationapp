@@ -1,0 +1,42 @@
+version: "3.9"
+   
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    user: root
+    hostname: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=<YourStrong@Passw0rd>
+    ports:
+        - "1433:1433"
+    volumes:
+      - ./data/sql:/var/opt/mssql
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  web:
+    build: .
+    # image: yosuaalbert/composedjango_web:latest
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    depends_on:
+      - db
+      - sqlserver
+
+networks:
+  default:
+    external:
+      name: ms_default
